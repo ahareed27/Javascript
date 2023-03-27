@@ -76,7 +76,12 @@ function LinkedList() {
         while (count < index){
             count++;
             currentNode = currentNode.next;
+            
+            if(currentNode === null){
+                return null;
+            }
         }
+        
         return currentNode.element;
     };
 
