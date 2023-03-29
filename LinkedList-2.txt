@@ -1,0 +1,151 @@
+class Node {
+
+	constructor(element) {
+		this.element = element;
+		this.next = null;
+	}
+}
+
+class LinkedList {
+	constructor() {
+		this.head = null;
+		this.size = 0;
+	};
+
+	add(element) {
+		var node = new Node(element);
+		var currentNode;
+		if (this.head === null)
+			this.head = node;
+		else {
+			currentNode = this.head;
+			
+			while (currentNode.next) {
+				currentNode = currentNode.next;
+			}
+			currentNode.next = node;
+		}
+		this.size++;
+	};
+	
+	insertAt(element, index) {
+	    var node = new Node(element);
+		var currentNode = this.head; 
+		var previousNode;
+		var currentIndex = 0;
+		
+		if (index < 0 || index > this.size)
+			return console.log("Please enter a valid index.");
+		else {
+			if (index === 0) {
+				node.next = currentNode;
+				this.head = node;
+			} else {
+			    while(currentIndex < index){
+			        currentIndex++;
+			        previousNode = currentNode;
+			        currentNode = currentNode.next;
+			    }
+			    
+			    node.next = currentNode;
+			    previousNode.next = node;
+			}
+			this.size++;
+		}
+	};
+
+	removeAt(index) {
+	    var currentNode = this.head; 
+		var previousNode;
+		var currentIndex = 0;
+	    
+		if (index < 0 || index >= this.size)
+			return console.log("Please Enter a valid index");
+		else {
+			if (index === 0) {
+				this.head = curr.next;
+			} else {
+				while (currentIndex < index) {
+					currentIndex++;
+					previousNode = currentNode;
+					currentNode = currentNode.next;
+				}
+				previousNode.next = currentNode.next;
+			}
+			this.size--;
+			return currentNode.element;
+		}
+	};
+
+	remove(element) {
+		var currentNode = this.head;
+		var previousNode;
+        if (currentNode.element === element) {
+            this.head = currentNode.next;
+        }
+        else{
+            while(currentNode.element !== element) {
+                if(currentNode.next === null){
+                    return "There is no " + element + " in the list."
+                }
+                previousNode = currentNode;
+                currentNode = currentNode.next;
+            }
+            previousNode.next = currentNode.next;
+        }
+        this.size--;
+        return true;
+	};
+
+	indexOf(element) {
+		var index = 0;
+		var currentNode = this.head;
+
+		while (currentNode) {
+			if (currentNode.element === element)
+				return index;
+			index++;
+			currentNode = currentNode.next;
+		}
+		
+		return element + " is not found in the list.";
+	}
+
+	isEmpty() {
+		return this.size == 0;
+	}
+
+	listSize() {
+		return this.size;
+	}
+
+	print() {
+		var currentNode = this.head;
+		var str = "";
+		while (currentNode) {
+			str += currentNode.element + " ";
+			currentNode = currentNode.next;
+		}
+		console.log(str);
+	}
+
+}
+
+var ll = new LinkedList();
+console.log(ll.isEmpty());
+ll.add(10);
+ll.print();
+console.log(ll.listSize());
+ll.add(20);
+ll.add(30);
+ll.add(40);
+ll.add(50);
+ll.print();
+console.log("is element removed ? " + ll.remove(50));
+ll.print();
+console.log("is in index : " + ll.indexOf(40));
+ll.insertAt(60, 2);
+ll.print();
+console.log("is List Empty ? " + ll.isEmpty());
+console.log(ll.removeAt(3));
+ll.print();
